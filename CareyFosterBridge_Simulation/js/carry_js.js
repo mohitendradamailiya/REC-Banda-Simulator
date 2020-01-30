@@ -6,6 +6,33 @@ function main() {
 function main_green() {
     btn_main2.style.display = 'none';
     btn_main.style.display = '';
+
+}
+
+function calculate_error() {
+
+    var before = document.getElementById('sp_val').value;
+    var after = document.getElementById('pow_val').value;
+
+    var u1 = document.getElementById("ddl");
+    var sr1 = u1.options[u1.selectedIndex].text;
+    //document.getElementById('length').innerHTML=sr1;
+    var after_f = -after;
+    if(before<4.5 && before>4.2 && after_f==5 && sr1=='Ohm.cm'){
+        alert("Experiment is successfully verified.Refresh the page to repeat the experiment.");
+
+    }
+    else if(before<4.5 && before>4.2 && after_f==5 && sr1=='Select unit here'){
+        alert("Please select the unit value to proceed...");
+
+    }
+    else if(before=='' && after=='' && sr1=='Select unit here'){
+        alert("Please enter value in all required fields..");
+    }
+    else{
+        alert("Experiment is not verified.There are some errors,Perform the experiment again.");
+    }
+
 }
 /*-----------------------------------------------------------------*/
 function choose_resist(){
@@ -38,6 +65,11 @@ function choose_resist(){
     }
 
     function specific() {
+
+        document.getElementById('err_button_cal').disabled=false;
+        document.getElementById('err_button_cal').style.cursor="pointer";
+        document.getElementById('err_button_cal').classList.remove("disabled");
+
         var e1 = document.getElementById("ddlViewBy1");
         var strUser1 = e1.options[e1.selectedIndex].text;
         var e2 = document.getElementById("ddlViewBy2");

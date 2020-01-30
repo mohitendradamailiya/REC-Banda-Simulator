@@ -496,7 +496,7 @@
                                 <h4>The given Radius(r) of the wire is(in cm)</h4>
                             </td>
                             <td style="border: none">
-                                <select id="ddlViewBy2">
+                                <select id="ddlViewBy2" >
                                     <option value="1">01</option>
                                     <option value="2">02</option>
                                     <option value="3">03</option>
@@ -533,6 +533,33 @@
         </tr>
     </table>
 </div>
+
+    <div>
+        <table style="width: 1160px;text-align: center;margin:20px 0 0 0px;border: none;background-color: lightpink;border-radius: 7px">
+            <tr style="border: none">
+                <td style="border: none">
+                    <h4>Verify the experiment by entering value of specific resistance :</h4>
+                </td>
+
+            </tr>
+            <tr >
+                <td style="border: none;padding: 0 0 10px 0">
+                    <input type="number" style="width: 250px" id="sp_val" placeholder="Enter value of multiple of power of 10">
+                    <input type="number" style="width: 250px" id="pow_val" placeholder="Enter value of power of 10">
+                    <select id="ddl" style="height: 25px">
+                        <option>Select unit here</option>
+                        <option value="1">Ohm.m</option>
+                        <option value="2">Ohm.cm</option>
+
+                    </select>
+                </td>
+            </tr>
+
+        </table>
+        <button type="button" id="err_button_cal" style="width: 150px;margin: 10px 0 0 0" class="btn btn-primary disabled" disabled onclick="calculate_error()">Click Here</button>
+
+    </div>
+
 </center>
 <hr>
 
