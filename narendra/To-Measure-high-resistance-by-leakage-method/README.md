@@ -1,1 +1,0 @@
-# To-Measure-high-resistance-by-leakage-method
