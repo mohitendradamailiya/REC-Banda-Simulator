@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>polarization of light</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	  	<script type="text/javascript" src="js/script.js"></script>
+		<style type="text/css">
+			#myCanvas{
+				background:url("image/back.svg");
+				background-repeat: no-repeat;
+				  
+			  	background-position: fixed;
+			  	background-position: 0px 0px;
+			  	background-size:cover;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12" style="background: #9ac0fc; font-size: 30px;text-align: center;color: black;"><b>Polarization of Light using He-Ne Laser</b></div>
+
+				<div class="col-md-4" style="margin-top:20px;border: 5px black solid; background: #dde9af;">
+					
+					<form style="color:black;">
+						<br>
+						Angle of impedence (&theta;)<br> <input type="text" id="theta"><br><br>
+						I<sub>max</sub> <br> <input type="text" id="Len"><br><br>
+						I<sub>min</sub> <br> <input type="text" id="Con"><br><br>
+						<input class="btn-success" type="submit" value="Submit" onclick="calculate()"> <br><br>
+					</form>
+				</div>
+
+				<div class="col-md-8">
+					<center>
+						<br>
+						<canvas id="myCanvas" width="740" height="350" style="border:3px solid green;">
+							<img id="pol" src="pol.svg" style="height: 10px;width: 20px;">
+						</canvas>
+					</center>
+				</div>
+						<div class="col-md-12" style="background: #9ac0fc;color: black;text-align: center;margin-top:10px; ">
+					     <h4>TABLE : OBSERVATIONS</h4>
+					        
+						</div>
+
+						<table id="example" class="display" style="width:100%">
+					        <thead>
+					            <tr>
+					                <th>S. No.</th>
+					                <th>Angle of impedence (&theta;)</th>
+					                <th>I<sub>max</sub></th>
+					                <th>I<sub>min</sub></th>
+					                <th>P</th>
+					            	
+					            </tr>
+					        </thead>
+					        <tbody>
+					            <tr>
+					                <td>1</td>
+					                <td><input type="text" id="i1" name="row-1-age"></td>
+					                <td><input type="text" id="i2" name="row-1-position" ></td>
+					                <td><input type="text" id="i3" name="row-1-position" ></td>
+					                <td><input type="text" id="i4" name="row-1-position" ></td>
+					            </tr>
+					            <tr>
+					                <td>2</td>
+					                <td><input type="text" id="i5" name="row-1-age"></td>
+					                <td><input type="text" id="i6" name="row-1-position" ></td>
+					                <td><input type="text" id="i7" name="row-1-position" ></td>
+					                <td><input type="text" id="i8" name="row-1-position" ></td>
+					            </tr>
+					            <tr>
+					                <td>3</td>
+					                <td><input type="text" id="i9" name="row-1-age"></td>
+					                <td><input type="text" id="i10" name="row-1-position" ></td>
+					                <td><input type="text" id="i11" name="row-1-position" ></td>
+					                <td><input type="text" id="i12" name="row-1-position" ></td>
+					            </tr>
+					            <tr>
+					                <td>4</td>
+					                <td><input type="text" id="i13" name="row-1-age"></td>
+					                <td><input type="text" id="i14" name="row-1-position" ></td>
+					                <td><input type="text" id="i15" name="row-1-position" ></td>
+					                <td><input type="text" id="i16" name="row-1-position" ></td>
+					            </tr>
+					            <tr>
+					                <td>5</td>
+					                <td><input type="text" id="i17" name="row-1-age"></td>
+					                <td><input type="text" id="i18" name="row-1-position" ></td>
+					                <td><input type="text" id="i19" name="row-1-position" ></td>
+					                <td><input type="text" id="i20" name="row-1-position" ></td>
+					            </tr>
+					        </tbody>
+					    </table>
+
+
+						<div class="row">
+							<div class="col-md-12">
+								<div id="dataTable"></div>
+								<br>
+								<center>
+									<button class="btn-success" onclick="calc();">Calculate</button>
+								</center>
+							</div>
+							<div class="col-md-4">
+								<div id="l1" style="height: 230px; width: 350px;"></div>
+							</div>
+						</div>
+						<!-- <script type="text/javascript">
+							
+							var c = document.getElementById("myCanvas");
+							var ctx = c.getContext("2d");
+							ctx.beginPath();
+							ctx.save();
+	
+							ctx.beginPath();
+							ctx.translate(535,60);
+							ctx.lineWidth = 2;
+							ctx.strokeStyle = "#00ffee";
+							ctx.strokeRect(-20, 0, 60,6);
+							ctx.rotate((Math.PI/180)*5);
+							ctx.stroke();
+							ctx.restore();
+							ctx.save();
+
+							ctx.beginPath();
+							ctx.save();
+							ctx.translate(535,170);
+							ctx.lineWidth = 2;
+							ctx.fillStyle = "#ffe600";
+							ctx.fillRect(-20, 0, 60,10);
+							ctx.rotate((Math.PI/180)*5);
+							ctx.stroke();
+							ctx.restore();
+							ctx.save();
+
+
+							function calc{
+								alert("ghbjn");
+								var m1 = document.getElementById("i1").value;
+								var m2 = document.getElementById("i2").value;
+								var m3 = document.getElementById("i3").value;
+								alert("m1");
+								var m4 = (m2-m3)/(m2+m3);
+								document.getElementById("i4").value=m4;
+							}
+						</script> -->	
+
+			</div>	
+		</div>		
+	</body>
+</html>
