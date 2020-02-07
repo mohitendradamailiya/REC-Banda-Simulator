@@ -5,7 +5,6 @@ var M4;
 var a1;
 var a2;
 var D;
-draw();
 function Concentration(){
 	
 	event.preventDefault();
@@ -41,6 +40,7 @@ function calculate() {
 		draw();
 		}
 	}
+}
 
 function draw() {
 	var c = document.getElementById("myCanvas");
@@ -242,10 +242,9 @@ function draw() {
 	ctx.restore();
 	ctx.save();
 
-	window.onload=function () {
-	 	createTable();
-	}
-} 
+}
+
+
 function drawGraph() {
 	var datapoints1 = [];
 	for (let i = 1; i <= 5; i++) {
@@ -256,6 +255,10 @@ function drawGraph() {
     }
 }
 
+window.onload = function(){
+	draw();
+	createTable();
+}
 
 function createTable() {
     var str = "<h3 class='text-center'></h3>"; 
