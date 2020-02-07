@@ -1,2 +1,3 @@
-# REC-Banda-Simulator
-internship at IIT Kanpur
+# Specific Rotation of Plane Polarized Light
+
+# Developed By - Mohitendra Damailiya
