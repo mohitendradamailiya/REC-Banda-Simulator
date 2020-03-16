@@ -559,7 +559,7 @@ var Canvas = function (id) {
     this.id = id;
     this.obj = document.getElementById(this.id);
     this.parent = this.obj.parentElement;
-    this.width = 700;//this.parent.clientWidth;
+    this.width = 500;//this.parent.clientWidth;
     this.height = 450;//this.parent.clientHeight;
     this.obj.setAttribute("width", this.width);
     this.obj.setAttribute("height", this.height);
@@ -571,8 +571,12 @@ var Canvas = function (id) {
     this.currentElement = null;
     this.timeInterval = null;
     this.battery = null;
+
     this.draw = function () {
         this.context.clearRect(0, 0, canvas.width, canvas.height);
+        var img = new Image();
+        img.src = "images/exam-circuit.png";
+        canvas.context.drawImage(img,380,3,120,90);
         document.getElementsByTagName("body")[0].style.cursor = "default";
         for (let ele in this.element) {
             this.element[ele].draw();
@@ -726,8 +730,8 @@ var Canvas = function (id) {
 };
 
 var StopWatch = function (x, y) {
-    this.width = 90;
-    this.height = 40;
+    this.width = 50;
+    this.height = 20;
     this.x = x;
     this.y = y;
     this.s = 0;
@@ -745,34 +749,37 @@ var StopWatch = function (x, y) {
         canvas.context.beginPath();
 
         canvas.context.fillStyle = "#bbb";
-        canvas.context.fillRect(this.x - 160, this.y - 20, 280, 100);
+        canvas.context.fillRect(this.x - 120, this.y - 20, 200, 70);
         canvas.context.fillStyle = "black";
+
         canvas.context.lineWidth = "4";
-        canvas.context.rect(this.x - 160, this.y - 20, 280, 100);
+        canvas.context.rect(this.x - 120, this.y - 20, 200, 70);
         canvas.context.strokeStyle = "black";
         canvas.context.stroke();
         canvas.context.closePath();
+
         canvas.context.clearRect(this.x, this.y, this.width, this.height);
         canvas.context.beginPath();
-        canvas.context.rect(this.x, this.y, this.width, this.height);
-        canvas.context.strokeStyle = "black";
+        // canvas.context.rect(this.x, this.y, this.width, this.height);
+        // canvas.context.strokeStyle = "black";
+
         canvas.context.fillStyle = "#CFD2CF";
         canvas.context.fillRect(this.x, this.y, this.width, this.height);
         canvas.context.lineWidth = 2;
         canvas.context.stroke();
         canvas.context.closePath();
 
-        canvas.context.font = "30px digitalFont";
-        canvas.context.fillStyle = "gray";
-        canvas.context.fillText(this.time, this.x + this.width / 2 - 30, this.y + this.height / 2 + 10);
-
-        canvas.context.font = "20px Arial";
+        canvas.context.font = "20px digitalFont";
         canvas.context.fillStyle = "black";
-        canvas.context.fillText("Stopwatch :", this.x + this.width / 2 - 170, this.y + this.height / 2 + 5);
+        canvas.context.fillText(this.time, this.x + this.width / 2 - 22.5, this.y + this.height / 2 + 5.5);
 
-        canvas.context.font = "20px Arial";
+        canvas.context.font = "15px Arial";
         canvas.context.fillStyle = "black";
-        canvas.context.fillText("SS:MS", this.x + this.width / 2 - 30, this.y + this.height / 2 + 40);
+        canvas.context.fillText("Stopwatch :", this.x + this.width / 2 - 120, this.y + this.height / 2 + 2.5);
+
+        canvas.context.font = "15px Arial";
+        canvas.context.fillStyle = "black";
+        canvas.context.fillText("SS:MS", this.x + this.width / 2 - 22.5, this.y + this.height / 2 + 26);
     }
     this.reset = function () {
         this.ms = 0;
@@ -822,7 +829,7 @@ window.onload = function () {
     window.discharging = this.document.getElementById("discharging");
     window.discharge = this.document.getElementById("discharge");
 
-    canvas.stopWatch = new this.StopWatch(170, 35);
+    canvas.stopWatch = new this.StopWatch(130, 30);
     canvas.stop();
     this.createTable();
     this.document.addEventListener("mousedown", function (e) {
@@ -924,8 +931,9 @@ window.onload = function () {
     this.init();
 
     document.getElementsByClassName("loader")[0].style.display = "none";
-    canvas.element.push(new point(canvas.id, null, 220, 300, 8, pointType.PASSIVE, "Z", null));
+    canvas.element.push(new point(canvas.id, null, 80, 300, 8, pointType.PASSIVE, "Z", null));
     canvas.draw();
+    this.drawGraph();
 };
 
 window.onresize = function () {
@@ -943,25 +951,25 @@ function mouseLeftDown(x, y) {
             canvas.redoArray = [];
         } else if (canvas.action == operationType.DRAW_TWO_WAY_KEY) {
             if (!checkInstance(TwoWayKey)) {
-                canvas.twoWayKey = new TwoWayKey(640, 301, "K0");
+                canvas.twoWayKey = new TwoWayKey(440, 301, "K0");
                 canvas.element.push(canvas.twoWayKey);
                 canvas.redoArray = [];
             }
         } else if (canvas.action == operationType.DRAW_CELL) {
             if (!checkInstance(Cell)) {
-                canvas.battery = new Cell(448, 400, "B");
+                canvas.battery = new Cell(248, 400, "B");
                 canvas.element.push(canvas.battery);
                 canvas.redoArray = [];
             }
         } else if (canvas.action == operationType.DRAW_RESISTOR) {
             if (!checkInstance(Resistor)) {
-                canvas.resistor = new Resistor(448, 350, "R");
+                canvas.resistor = new Resistor(248, 350, "R");
                 canvas.element.push(canvas.resistor);
                 canvas.redoArray = [];
             }
         } else if (canvas.action == operationType.DRAW_GALVANOMETER) {
             if (!checkInstance(Galvanometer)) {
-                canvas.galvanometer = new Galvanometer(448, 150, "G");
+                canvas.galvanometer = new Galvanometer(248, 150, "G");
                 canvas.element.push(canvas.galvanometer);
                 canvas.redoArray = [];
             }
@@ -973,9 +981,9 @@ function mouseLeftDown(x, y) {
             }
         } else if (canvas.action == operationType.DRAW_TAPKEY) {
             if (!checkInstance(TapKey)) {
-                canvas.tapKey_1 = new TapKey(548, 365, "K1");
-                canvas.tapKey_2 = new TapKey(448, 217, "K2");
-                canvas.tapKey_3 = new TapKey(550, 150, "K3");
+                canvas.tapKey_1 = new TapKey(348, 365, "K1");
+                canvas.tapKey_2 = new TapKey(248, 217, "K2");
+                canvas.tapKey_3 = new TapKey(350, 150, "K3");
                 canvas.element.push(canvas.tapKey_1);
                 canvas.element.push(canvas.tapKey_2);
                 canvas.element.push(canvas.tapKey_3);
@@ -984,7 +992,7 @@ function mouseLeftDown(x, y) {
         }
         else if (canvas.action == operationType.DRAW_CONDENSER) {
             if (!checkInstance(Condenser)) {
-                canvas.condenser = new Condenser(448, 300, "C");
+                canvas.condenser = new Condenser(248, 300, "C");
                 canvas.element.push(canvas.condenser);
                 canvas.redoArray = [];
             }
