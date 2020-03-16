@@ -89,25 +89,15 @@
                 <div class="row"> </div>
             </div>
             <div class="col-md-8 col-xl-8 p-0" style="border: 0px inset green; box-shadow: 0px 0px 20px #bbb;">
-
-                <div class="row">
-                    <div class="col-md-8">
-                        <canvas id="myCanvas"
-                            style="background-image: url(images/back.svg); background-size: 100px 100px;">
-                        </canvas>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col">
-                                <div id="l1" style="width:300px;height:300px;"></div>
-                            </div>
-                        </div>
-                        <div class="row" style="justify-content: center;">
-                            <div class="col-md-8" style="align-items: center; text-align: center; padding: 20px 0px; background-color: white; box-sizing: border-box; font-size: 50px;">
-                                <h6>Capacitor value :</h6>
-                                C = 0.8&micro;F
-                            </div>
-                        </div>
+                <div style="display: inline-block;">
+                    <canvas id="myCanvas" style="background-image: url(images/back.svg); background-size: 100px 100px;">
+                    </canvas>
+                </div>
+                <div style="height: 450px; background:transparent; width: 295px; float: right;">
+                    <div id="l1" style="width:100%;height:300px;"></div>
+                    <div style="align-items: center; text-align: center; padding: 20px 0px; background-color: white; box-sizing: border-box; font-size: 25px;">
+                        <h6>Capacitor value :</h6>
+                        C = 0.8&micro;F
                     </div>
                 </div>
                 <div class="row">
@@ -176,6 +166,7 @@
         <div style="color: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-20%);">Loading....
         </div>
     </div>
+    <img src="images/exam-circuit.png" id="samp-cir" style="display: none;">
 </body>
 
 </html>
