@@ -12,6 +12,8 @@ body {
     /* Standard syntax */
     background-color: aliceblue;
     width: 1200px;
+	margin: 0px auto;
+	margin-bottom: 20px;
 }
 
 #header-nav {
@@ -229,7 +231,7 @@ th {
 }
 
 th {
-    padding: 10px 20px;
+    padding: 5px 0px;
 }
 
 td input {
