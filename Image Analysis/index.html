@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+
+	<div class="d1" style="margin: auto;
+    height: 700px;
+    width : 1400px;
+    border: 20px solid black ;
+    border-color: black;
+    background: #fff1e0;">
+
+  		<div class="container-fluid">
+			<div class="row" style="justify-content: center;">
+				<div class="col-md-8">
+					  <canvas id='canvas' style='border: 1px solid; width: 800px; height: 600px; margin: 25px;'>  Sorry, your browser does not support the canvas tag.
+ 					 </canvas>
+				</div>
+
+				<div class="col-md-4" >
+					<div style="border: 1px solid black; height: 600px; width: 400px; margin: 25px;">
+						<div>
+							<input type="file" id="photo" style="margin: 15px;">
+						</div>
+
+						<div id="assumptions" style="margin: 15px">
+							<h3>Assumption</h3>
+							<h5>For Black spots</h5>
+							<ul>
+								<li>Density = 250 unit</li>
+								<li>Posity = 50 unit</li>
+								<li>Young's Modulus = 90 unit</li>
+							</ul>
+
+							<h5>For White spots</h5>
+							<ul>
+								<li>Density = 150 unit</li>
+								<li>Posity = 80 unit</li>
+								<li>Young's Modulus = 65 unit</li>
+							</ul>
+							
+						</div>
+						<div>
+							<h5 style="margin: 5px;">Select proprty</h5>
+							<select id="select" style="margin: 5px;">
+								<option value="0">--select--</option>
+								<option value="1">Density</option>
+								<option value="2">Porosity</option>
+								<option value="3">Young's Modulous</option>
+							</select>
+						</div>
+						<div>
+							<button id="res" style="margin: 5px" onclick="message()">Result</button>
+						</div>
+						<div>
+							<h3>Analysis of Image</h3>
+							<div>
+								<p id="demo1"></p>
+								<p id="demo2"></p>
+								<p id="demo3"></p>
+							
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+  <script>
+
+    // Cache a reference to the html element
+    var canvas = document.getElementById('canvas');
+
+
+    // Set the drawing surface dimensions to match the canvas
+    canvas.width = canvas.scrollWidth;
+    canvas.height = canvas.scrollHeight;
+
+    // Get a reference to the 2d drawing context / api
+    var ctx = canvas.getContext('2d');
+
+    // ----------------------------------------------------
+    // Create a new image object
+    // ----------------------------------------------------
+
+
+	ctx.font = "20px Georgia";
+	ctx.fillStyle = "black";
+	ctx.fillText("Please upload Image", 300, 300);
+
+    var image = new Image();
+
+
+
+        //Mouse coordinate
+            function getMousePosition(canvas, event) { 
+            window.rect = canvas.getBoundingClientRect(); 
+            window.x = event.clientX - rect.left; 
+            window.y = event.clientY - rect.top; 
+            console.log("Coordinate x: " + x,  
+                        "Coordinate y: " + y); 
+        } 
+      
+        let canvasElem = document.querySelector("canvas"); 
+          
+        canvasElem.addEventListener("mousedown", function(e) 
+        { 
+            getMousePosition(canvasElem, e); 
+            
+    	  var pixel = ctx.getImageData(x,y, 1,1);
+    	          });
+
+
+    // ----------------------------------------------------
+    // Code to run when image has loaded
+    // ----------------------------------------------------
+
+    image.onload = function () {
+
+      // Draw image onto canvas (full size)
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      // Get pixel data from the canvas
+      window.pixelData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      //console.log(pixelData);
+
+      // Iterate over all pixels to modify
+      // Each pixel equals 4 items in the array (r, g, b, a)
+      // 
+      // In this example:
+      // -------------------------------------------------- 
+      // Set the green and blue channels to 0, so we're 
+      // only left with the red channel
+
+      for (var i = 0; i < pixelData.data.length; i += 4) {
+
+        // Set green and blue channels to 0
+        var avg = 1.2*(pixelData.data[i]+pixelData.data[i+1]+pixelData.data[i+2])/3;
+        pixelData.data[i] = avg; // r
+        pixelData.data[i + 1] = avg; // g
+        pixelData.data[i + 2] = avg; // b
+      }
+
+      //console.log(pixelData.data);
+      // Put new pixel data back into canvas
+      ctx.putImageData(pixelData, 0, 0);
+
+    };
+
+    function calculateDensity(pixel){
+    	window.colorPer = {
+    		white: 50,
+    		black: 50
+    	}
+    	var temp = 100*pixel/255;
+    	colorPer.white = temp;
+    	colorPer.black = 100-colorPer.white;
+
+    	return colorPer;
+    }
+
+    function calculateTotalDensity(){
+            var count =0;
+            var totalWBdens = {
+            	w: 0,
+            	b:0
+            }
+    	  for (var i = 0; i < pixelData.data.length; i += 4) {
+    	  	//if(pixel.data[0]==pixelData.data[i] && pixel.data[1]==pixelData.data[i+1] && pixel.data[2]==pixelData.data[i+2]){
+    	  		count++;
+    	  		var dens =calculateDensity(pixelData.data[i]);
+    	  		totalWBdens.w+=dens.white;
+    	  		totalWBdens.b+=dens.black;
+
+    	  	//}
+    	  }
+    	  totalWBdens.w = totalWBdens.w/count;
+    	  totalWBdens.b=totalWBdens.b/count;
+    	  return totalWBdens;
+    }
+
+
+
+
+    // ----------------------------------------------------
+    // Start the image loading
+    // ----------------------------------------------------
+
+    //image.src = './image.png';
+
+    document.getElementById('photo').onchange = function (evt)
+	    {
+   			 var tgt = evt.target || window.event.srcElement;
+        	 var files = tgt.files;
+        	  if (FileReader && files && files.length) {
+			        var fr = new FileReader();
+			        fr.onload = function () {
+			            image.src = fr.result;
+			        }
+			        fr.readAsDataURL(files[0]);
+    }
+
+        }
+
+
+
+
+
+    function message()
+    {
+    	var density = calculateTotalDensity();
+
+    	var select = document.getElementById("select").value;
+    	if(select == 1)
+    {	var total = density.w*1.5+density.b*2.5;
+    	document.getElementById("demo1").innerHTML = "Density of white spots= "+(density.w*1.5).toFixed(2)+" Kg per cubic meter";	
+    	document.getElementById("demo2").innerHTML = "Density of Black spots= "+(density.b*2.5).toFixed(2)+" Kg per cubic meter";
+    	document.getElementById("demo3").innerHTML = "Total Density= "+(total).toFixed(2)+" Kg per cubic meter";
+    }
+
+    	else if (select ==2) {
+    	var total = density.w*0.8+density.b*0.5;
+    	document.getElementById("demo1").innerHTML = "Porosity of White spots= "+(density.w*0.8).toFixed(2);	
+    	document.getElementById("demo2").innerHTML = "Porosity of Black spots=  "+(density.b*0.5).toFixed(2);
+    	document.getElementById("demo3").innerHTML = "Total Porosity= "+(total).toFixed(2);
+    	}
+    	else if (select==3){
+    	var total = density.w*0.65+density.b*0.9;
+    	document.getElementById("demo1").innerHTML = "Young's Modulus of White spots= "+(density.w*0.9).toFixed(2);	
+    	document.getElementById("demo2").innerHTML = "Young's Modulus of Black spots= "+(density.b*0.65).toFixed(2);
+    	document.getElementById("demo3").innerHTML = "Total Young's Modulus= "+(total).toFixed(2);
+    	}
+    	else{ alert("Please Select");}
+    }
+
+  </script>
+
+</body>
+
+</html>
