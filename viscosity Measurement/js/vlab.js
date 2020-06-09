@@ -253,14 +253,14 @@ var StopWatch = function (x, y) {
 }
 
 function liquidDisplay() {
-	context.font = "20px Georgia";
+	context.font = "15px Georgia";
 	context.fillStyle = "black";
 	context.fillText(window.message, 100, 120);
 
 }
 
 function ballDisplay() {
-	context.font = "20px Georgia";
+	context.font = "15px Georgia";
 	context.fillStyle = "black";
 	context.fillText(window.message2, 100, 160);
 
@@ -271,7 +271,7 @@ function selectValue1() {
 	window.lequidDensity = document.getElementById("select1").value;
 
 
-	window.message = "Liquid density=" + lequidDensity + " Kg/m3";
+	window.message = "Liquid density=" + lequidDensity + " Kg per cubic meter";
 
 	if (window.lequidDensity == 997) {
 
@@ -289,7 +289,7 @@ function selectValue2() {
 	if (window.lequidDensity!=0) 
 	{
 		window.ballDensity = document.getElementById("select2").value;
-		window.message2 = "Ball density = " + ballDensity + " Kg/m3";
+		window.message2 = "Ball density = " + ballDensity + " Kg per cubic meter";
 
 		if (window.ballDensity == 1602) {
 			window.ballColor = "#c9ebc3";
@@ -315,9 +315,9 @@ function textValue() {
 
 
 		window.handle.radius = document.getElementById("field").value;
-		if (isNaN(handle.radius) || handle.radius < 10 || handle.radius >50) 
+		if (isNaN(handle.radius) || handle.radius < 10 || handle.radius >35) 
 		{
-    		alert("Please Enter radius between 10 to 50");
+    		alert("Please Enter radius between 10 to 35");
   		}
 
 	else
@@ -364,7 +364,7 @@ function createTable() {
  function Error ()
  {
  	var userViscosity = document.getElementById("terror").value;
- 	var  error = (visc-userViscosity)*100/visc;
+ 	var  error = 100*(userViscosity-visc)/visc;
  	if (isNaN(userViscosity)) 
  	{ 
  		alert("Please input Valid number");	
