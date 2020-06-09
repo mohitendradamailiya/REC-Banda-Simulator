@@ -29,11 +29,8 @@ function calculate() {
 			alert("Please fill the length and input angle both");
 		}
 		else{
-		alert(M3);
 		M4 = (10*M1)/(M2*M3);
 	 		//document.getElementById("Spe").value = M4;
-	 		alert(M1);
-	 		alert(M4);
 	 		a1=M1;
 		a2=M4;
 		D=M2;
