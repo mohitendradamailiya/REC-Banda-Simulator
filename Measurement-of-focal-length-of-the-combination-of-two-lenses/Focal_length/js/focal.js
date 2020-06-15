@@ -127,7 +127,7 @@ window.onload = function() {
     });
 
     document.getElementById("lens2").addEventListener("click", function() {
-        window.lx2 = 500;
+        window.lx2 = 450;
         window.ly2 = 229;
         window.flag2 = 0;
         convexlens2(lx2, ly2);
@@ -174,7 +174,7 @@ window.onload = function() {
         bench();
         object();
         if (flag1 == 0) {
-            if ((lx1 >= 680)) {
+            if ((lx1 >= 530)) {
                 terminal.update("You can't move the Lens A further..");
             } else {
                 lx1 += 10;
@@ -225,7 +225,7 @@ window.onload = function() {
         bench();
         object();
         if (flag2 == 0) {
-            if ((lx2 >= 630)) {
+            if ((lx2 >= 480 )) {
                 terminal.update("Optical bench exceeds..");
             } else {
                 lx2 += 10;
@@ -233,7 +233,7 @@ window.onload = function() {
             convexlens2(lx2, ly2);
             draw2();
         } else {
-            if ((lx2 >= 580)) {
+            if ((lx2 >= 500)) {
                 terminal.update("You can't move the Lens B further..");
             } else {
                 lx2 += 10;
@@ -309,7 +309,7 @@ function convexlens2(x, y) {
 function bench() {
     context.beginPath();
     context.moveTo(49, 229);
-    context.lineTo(901, 229);
+    context.lineTo(751, 229);
     context.strokeStyle = "black"
     context.lineWidth = 5;
     context.stroke();
@@ -317,7 +317,7 @@ function bench() {
     context.fillStyle = "black";
     context.fillText("0", 494, 270);*/
 
-    for (var i = 0, j = 8; i <= 852; i += 10) {
+    for (var i = 0, j = 8; i <= 702; i += 10) {
         if (i % 50 === 0) {
             if (!(i >= 300 && i <= 220)) {
                 context.beginPath();
