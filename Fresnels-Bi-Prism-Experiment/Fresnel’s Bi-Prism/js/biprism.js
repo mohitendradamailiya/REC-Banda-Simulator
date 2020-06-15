@@ -229,7 +229,7 @@ function biprism() {
 function bench() {
     canvas.context.beginPath();
     canvas.context.moveTo(49, 259);
-    canvas.context.lineTo(851, 259);
+    canvas.context.lineTo(751, 259);
     canvas.context.strokeStyle = "black"
     canvas.context.lineWidth = 5;
     canvas.context.stroke();
@@ -237,7 +237,7 @@ function bench() {
     canvas.context.fillStyle = "black";
     canvas.context.fillText("0", 43, 295);
 
-    for (var i = 0, j = 8; i <= 805; i += 10) {
+    for (var i = 0, j = 8; i <= 700; i += 10) {
         if (i % 50 === 0) {
             if (!(i >= 300 && i <= 220)) {
                 canvas.context.beginPath();
@@ -264,7 +264,7 @@ function eyepiece() {
     canvas.context.drawImage(eyeimg, 725, 158, 130, 201);
     canvas.context.font = "16px Inter";
     canvas.context.fillStyle = "black";
-    canvas.context.fillText("Eyepiece", 755, 390);
+    canvas.context.fillText("Eyepiece", 690, 390);
 }
 
 function lsource() {
